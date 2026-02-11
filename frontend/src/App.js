@@ -23,7 +23,7 @@ import AIInsightPanel from './components/AIInsightPanel';
 import GenreSelector from './components/GenreSelector';
 import './App.css';
 
-const API = 'http://localhost:5000/api';
+const API = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api';
 
 const DEFAULT_BEAT = {
   bpm: 120,
