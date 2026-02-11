@@ -1,0 +1,149 @@
+:root {
+  --label-width: 90px;
+}
+
+.sequencer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  overflow-y: auto;
+  position: relative;
+  gap: 0;
+}
+
+/* Info bar */
+.seq-info-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.seq-info-item { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.seq-info-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: var(--text-muted);
+}
+.seq-info-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px; font-weight: 700; color: var(--accent-cyan);
+}
+.seq-description {
+  flex: 1; font-size: 13px; color: var(--text-secondary);
+  font-style: italic; text-align: center;
+}
+
+/* Ruler */
+.seq-ruler { display: flex; align-items: center; margin-bottom: 6px; }
+.seq-label-spacer { width: var(--label-width); flex-shrink: 0; }
+
+.seq-steps-row {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 3px;
+}
+
+.seq-ruler-cell {
+  height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; color: var(--text-muted);
+  transition: color 0.1s;
+}
+.seq-ruler-cell.beat { color: var(--text-secondary); font-size: 10px; font-weight: 700; }
+.seq-ruler-cell.active { color: var(--accent-cyan); }
+
+/* Tracks */
+.seq-tracks { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+
+.seq-track {
+  display: flex; align-items: center;
+}
+.seq-track.building {
+  opacity: 0;
+  animation: track-appear 0.3s ease-out forwards;
+  animation-delay: calc(var(--track-idx) * 100ms);
+}
+@keyframes track-appear {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.seq-track-label {
+  width: var(--label-width);
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+  padding-right: 12px;
+}
+.track-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.seq-track:hover .track-dot { transform: scale(1.4); }
+.track-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--text-secondary); text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Steps */
+.seq-step {
+  height: 38px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--bg-card);
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: all 0.1s ease;
+  outline: none;
+}
+.seq-step.beat-start { border-left-color: rgba(255,255,255,0.1); }
+.seq-step:hover {
+  border-color: var(--step-color);
+  background: rgba(255,255,255,0.05);
+  transform: scale(1.03);
+}
+
+.seq-step.active {
+  background: var(--step-color);
+  border-color: var(--step-color);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--step-color) 50%, transparent);
+}
+.seq-step.active::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+}
+
+.seq-step.current {
+  border-color: white;
+  filter: brightness(1.4);
+  transform: scale(1.05);
+  z-index: 1;
+}
+.seq-step.current.active { animation: step-fire 0.15s ease-out; }
+@keyframes step-fire {
+  0%   { transform: scale(1.1); filter: brightness(2.2); }
+  100% { transform: scale(1.05); filter: brightness(1.4); }
+}
+
+/* Empty state */
+.seq-empty {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px; pointer-events: none;
+}
+.seq-empty-icon  { font-size: 48px; opacity: 0.2; }
+.seq-empty-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--text-muted); text-transform: uppercase;
+}
+.seq-empty-sub {
+  font-size: 13px; color: var(--text-muted); opacity: 0.6;
+  text-align: center; max-width: 280px;
+}

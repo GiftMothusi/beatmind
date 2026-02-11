@@ -1,0 +1,33 @@
+.track-controls {
+  padding: 14px 16px; background: var(--bg-panel);
+  display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;
+}
+
+.track-list { display: flex; flex-direction: column; gap: 8px; }
+
+.track-row { display: flex; flex-direction: column; gap: 4px; }
+
+.track-info { display: flex; align-items: center; gap: 7px; }
+.track-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.track-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+  color: var(--text-secondary); text-transform: uppercase;
+}
+
+.volume-row { display: flex; align-items: center; gap: 6px; padding-left: 14px; }
+
+.vol-slider {
+  flex: 1; height: 3px; -webkit-appearance: none;
+  background: var(--bg-hover); border-radius: 2px; outline: none; cursor: pointer;
+}
+.vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--tc, var(--accent-purple)); cursor: pointer; transition: transform 0.1s;
+}
+.vol-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+.vol-value {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  color: var(--text-muted); width: 22px; text-align: right;
+}
