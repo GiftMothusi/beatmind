@@ -1,5 +1,7 @@
 # 🎵 BeatMind — AI Beat Studio
 
+![BeatMind](frontend/public/beatmind.png)
+
 A prompt-driven AI beat builder. Describe a vibe, watch your beat animate to life, then refine it conversationally. Powered by Claude AI, built with React + Python Flask.
 
 ---

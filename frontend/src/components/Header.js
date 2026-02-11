@@ -19,8 +19,7 @@ export default function Header({
     <header className="header">
       {/* Logo */}
       <div className="header-logo">
-        <div className="logo-icon"><Music size={14} /></div>
-        <span className="logo-text">BEAT<span className="logo-accent">MIND</span></span>
+        <img src="/beatmind_logo.png" alt="BeatMind" className="logo-image" />
       </div>
 
       {/* Beat name */}

@@ -158,14 +158,12 @@ export default function App() {
     getTransport().bpm.value = beatRef.current.bpm;
     noteCounters.current = {};
 
-    let step = 0;
-
     sequencerRef.current = new Sequence(
-      (time) => {
+      (time, stepIdx) => {
         const currentBeat = beatRef.current;
 
         currentBeat.tracks.forEach(track => {
-          if (track.steps[step]) {
+          if (track.steps[stepIdx]) {
             if (noteCounters.current[track.id] === undefined) {
               noteCounters.current[track.id] = 0;
             }
@@ -178,12 +176,10 @@ export default function App() {
         });
 
         getDraw().schedule(() => {
-          setCurrentStep(step);
+          setCurrentStep(stepIdx);
         }, time);
-
-        step = (step + 1) % 16;
       },
-      null,
+      [...Array(16).keys()],
       '16n'
     );
 
